@@ -5,7 +5,9 @@ const List = () => {
   return (
     <TodoList>
       <ListInputForm />
-      <TodoContant>테스트</TodoContant>
+      <TodoContant>테스트
+        <TodoContentBtn>X</TodoContentBtn>
+      </TodoContant>
     </TodoList>
   );
 }
@@ -18,10 +20,17 @@ const TodoList = styled.ul`
   flex-direction: column;
   gap: 16px;
   padding: 16px;
+  border-radius: 10px;
 `
 
 const TodoContant = styled.li`
+  display: flex;
+  justify-content: space-between;
   color: blueviolet;
+`
+const TodoContentBtn = styled.button`
+  color: crimson;
+  font-weight: 900;
 `
 
 export default List;
