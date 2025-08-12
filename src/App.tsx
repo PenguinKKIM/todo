@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components"
 import List from "./list/List";
+import ListInputForm from "./list/ListInputForm";
 
 function App() {
 
@@ -8,7 +9,9 @@ function App() {
       <GlobalStyle />
       <Container>
         <Title>To Do List</Title>
+        <ListInputForm />
         <List />
+
       </Container>
     </>
   )

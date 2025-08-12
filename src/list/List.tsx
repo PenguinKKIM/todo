@@ -1,30 +1,25 @@
 import styled from "styled-components";
-import ListInputForm from "./ListInputForm";
-import { useAtom } from "jotai";
-import { TodoLocalStorage } from "../atom";
+import { useAtom, useSetAtom } from "jotai";
+import { removeTodoAtom, todoAtom } from "../atom";
+
 
 const List = () => {
 
-  const [todos, setTodos] = useAtom(TodoLocalStorage);
+  const [todos] = useAtom(todoAtom);
+  const removeTodo = useSetAtom(removeTodoAtom)
 
-  const removeTodo = (idx: number) =>
-    setTodos(prev => prev.filter((_, i) => i !== idx));
+  if (todos.length === 0) {
+    return <div>할 일을 등록해주세요</div>
+  }
 
   return (
     <TodoList>
-      <ListInputForm />
-      {todos.length === 0 ? (
-        <div>할 일을 등록해주세요</div>
-      ) : (
-        todos
-          .filter((t): t is string => !!t)
-          .map((todo, i) => (
-            <TodoContant key={i}>
-              {todo}
-              <TodoContentBtn onClick={() => removeTodo(i)}>X</TodoContentBtn>
-            </TodoContant>
-          ))
-      )}
+      {todos.map((todo) => (
+        <TodoContant key={todo.id}>
+          {todo.text}
+          <TodoContentBtn onClick={() => removeTodo(todo.id)}>X</TodoContentBtn>
+        </TodoContant>
+      ))}
     </TodoList>
   );
 }
