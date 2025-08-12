@@ -14,7 +14,7 @@ const List = () => {
     <TodoList>
       <ListInputForm />
       {todos.length === 0 ? (
-        <div>할 일을  등록해주세요</div>
+        <div>할 일을 등록해주세요</div>
       ) : (
         todos
           .filter((t): t is string => !!t)
