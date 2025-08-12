@@ -1,13 +1,30 @@
 import styled from "styled-components";
 import ListInputForm from "./ListInputForm";
+import { useAtom } from "jotai";
+import { TodoLocalStorage } from "../atom";
 
 const List = () => {
+
+  const [todos, setTodos] = useAtom(TodoLocalStorage);
+
+  const removeTodo = (idx: number) =>
+    setTodos(prev => prev.filter((_, i) => i !== idx));
+
   return (
     <TodoList>
       <ListInputForm />
-      <TodoContant>테스트
-        <TodoContentBtn>X</TodoContentBtn>
-      </TodoContant>
+      {todos.length === 0 ? (
+        <div>할 일을  등록해주세요</div>
+      ) : (
+        todos
+          .filter((t): t is string => !!t)
+          .map((todo, i) => (
+            <TodoContant key={i}>
+              {todo}
+              <TodoContentBtn onClick={() => removeTodo(i)}>X</TodoContentBtn>
+            </TodoContant>
+          ))
+      )}
     </TodoList>
   );
 }
@@ -28,6 +45,7 @@ const TodoContant = styled.li`
   justify-content: space-between;
   color: blueviolet;
 `
+
 const TodoContentBtn = styled.button`
   color: crimson;
   font-weight: 900;

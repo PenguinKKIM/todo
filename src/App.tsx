@@ -3,7 +3,6 @@ import List from "./list/List";
 
 function App() {
 
-
   return (
     <>
       <GlobalStyle />
